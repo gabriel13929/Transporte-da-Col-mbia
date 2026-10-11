@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Transporte inteligente na Colômbia</title>
+<meta name="description" content="Como funcionam o TransMilenio, o metrô e o Metrocable de Medellín, as ciclovias e os ônibus elétricos nas cidades colombianas, com seus benefícios, desafios e impactos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --yellow:#FCD116; --blue:#003893; --red:#CE1126; --deep:#0B2A70;
+  --bg:#F5F7FC; --surface:#FFFFFF; --text:#14203C; --muted:#4B5877; --border:#D9DEEC;
+  --ink:#003893; --tint-y:#FFF2B3; --tint-b:#E2EAFA; --tint-r:#FBE2E5;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1120; --surface:#141C30; --text:#EDF0F8; --muted:#A9B3CE; --border:#28345A;
+    --ink:#9DBBFF; --tint-y:#3A3310; --tint-b:#14264D; --tint-r:#3B1319;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1120; --surface:#141C30; --text:#EDF0F8; --muted:#A9B3CE; --border:#28345A;
+  --ink:#9DBBFF; --tint-y:#3A3310; --tint-b:#14264D; --tint-r:#3B1319;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth;}}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Literata',Georgia,'Times New Roman',serif;font-size:1.0625rem;line-height:1.7;-webkit-text-size-adjust:100%;}
+h1,h2,h3,h4,.sans{font-family:'Bricolage Grotesque','Trebuchet MS','Segoe UI',system-ui,sans-serif;}
+img,svg{max-width:100%;display:block;}
+a{color:var(--ink);}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:4px;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+
+/* Navegação */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--surface);border-bottom:1px solid var(--border);}
+.topbar::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:4px;background:linear-gradient(90deg,var(--yellow) 0 50%,var(--blue) 50% 75%,var(--red) 75% 100%);}
+.topbar-in{max-width:1120px;margin:0 auto;padding:8px 20px;display:flex;align-items:center;gap:14px;}
+.brand{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:1.15rem;text-decoration:none;color:var(--ink);flex:none;line-height:1.1;}
+.topbar nav{flex:1;min-width:0;}
+.topbar ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto;position:relative;scrollbar-width:none;}
+.topbar ul::-webkit-scrollbar{display:none;}
+.topbar nav a{display:block;white-space:nowrap;padding:8px 13px;border-radius:999px;font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:500;font-size:.92rem;text-decoration:none;color:var(--text);}
+.topbar nav a:hover{background:var(--tint-b);}
+.topbar nav a.on{background:var(--blue);color:#fff;}
+
+/* Hero azul, com faixa amarela e vermelha embaixo */
+.hero{background:var(--blue);color:#fff;padding:56px 0 64px;margin-top:5px;}
+.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center;}
+.hero h1{font-weight:800;font-size:clamp(2.2rem,5.2vw,3.7rem);line-height:1.05;margin:0 0 18px;letter-spacing:-.02em;color:#fff;}
+.hero p.lead{font-size:1.15rem;max-width:34em;margin:0 0 26px;color:#E4ECFF;}
+.btns{display:flex;flex-wrap:wrap;gap:12px;}
+.btn{display:inline-block;padding:13px 22px;border-radius:12px;font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:700;text-decoration:none;font-size:1rem;}
+.btn.primary{background:var(--yellow);color:#0B1F4D;}
+.btn.ghost{border:2px solid #fff;color:#fff;}
+.hero figure{margin:0;border-radius:22px;overflow:hidden;border:4px solid var(--yellow);box-shadow:10px 10px 0 var(--red);}
+.facts{background:var(--yellow);color:#0B1F4D;}
+.facts dl{max-width:1120px;margin:0 auto;padding:22px 20px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+.facts div{min-width:0;}
+.facts dt{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:1.7rem;line-height:1;}
+.facts dd{margin:4px 0 0;font-size:.92rem;line-height:1.3;}
+.redband{height:14px;background:var(--red);}
+
+/* Seções */
+.sec{position:relative;padding:84px 0 72px;--accent:var(--yellow);--onaccent:#0B1F4D;}
+.sec.alt{background:var(--surface);}
+.sec + .sec::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(90deg,var(--yellow) 0 50%,var(--blue) 50% 75%,var(--red) 75% 100%);}
+.sec.b{--accent:var(--blue);--onaccent:#fff;}
+.sec.r{--accent:var(--red);--onaccent:#fff;}
+.sec-head{margin-bottom:34px;}
+.sec-head h2{display:flex;align-items:center;gap:14px;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1;margin:0 0 14px;color:var(--ink);letter-spacing:-.015em;}
+.stop{flex:none;display:inline-flex;align-items:center;justify-content:center;width:2.1em;height:2.1em;border-radius:50%;background:var(--accent);color:var(--onaccent);font-size:.7em;font-weight:800;border:3px solid var(--surface);box-shadow:0 0 0 3px var(--accent);}
+.sec-head p{margin:0;max-width:44em;font-size:1.15rem;color:var(--muted);}
+h3{font-size:1.45rem;line-height:1.2;margin:34px 0 10px;color:var(--ink);}
+h4{font-size:1.15rem;line-height:1.25;margin:0 0 6px;}
+p{margin:0 0 1em;max-width:42em;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;}
+.split.rev > :first-child{order:2;}
+figure{margin:0;}
+.fig{border-radius:18px;overflow:hidden;border:1px solid var(--border);background:var(--surface);}
+figcaption{font-size:.9rem;color:var(--muted);padding:10px 4px 0;font-style:italic;line-height:1.5;}
+.sticky{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin:18px 0 0;}
+.card{background:var(--surface);border:1px solid var(--border);border-top:6px solid var(--c,var(--yellow));border-radius:14px;padding:18px 18px 8px;}
+.alt .card{background:var(--bg);}
+.card:nth-child(3n+1){--c:var(--yellow);}
+.card:nth-child(3n+2){--c:var(--blue);}
+.card:nth-child(3n){--c:var(--red);}
+.card p{font-size:.98rem;line-height:1.6;}
+.card .where{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:.88rem;color:var(--muted);margin:0 0 8px;font-weight:500;}
+
+.fact{background:var(--tint-y);border-left:6px solid var(--yellow);border-radius:0 12px 12px 0;padding:14px 18px 2px;margin:24px 0;max-width:42em;}
+.fact.b{background:var(--tint-b);border-color:var(--blue);}
+.fact.r{background:var(--tint-r);border-color:var(--red);}
+.fact strong:first-child{font-family:'Bricolage Grotesque',system-ui,sans-serif;}
+.note{font-size:.88rem;color:var(--muted);line-height:1.55;max-width:46em;}
+
+.chips{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+.chips li{background:var(--tint-b);border-radius:12px;padding:12px 16px;font-size:.98rem;line-height:1.55;}
+.chips li:nth-child(3n+1){background:var(--tint-y);}
+.chips li:nth-child(3n){background:var(--tint-r);}
+.chips b{font-family:'Bricolage Grotesque',system-ui,sans-serif;}
+
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0 0;}
+.pillar{border-radius:16px;padding:18px 18px 6px;background:var(--tint-b);}
+.pillar:nth-child(4n+1){background:var(--tint-y);}
+.pillar:nth-child(4n+3){background:var(--tint-r);}
+.pillar svg{width:52px;height:52px;margin-bottom:8px;}
+.pillar p{font-size:.97rem;line-height:1.6;}
+
+.scroll{overflow-x:auto;border:1px solid var(--border);border-radius:14px;margin:16px 0;}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.96rem;line-height:1.5;background:var(--surface);}
+.alt table{background:var(--bg);}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+th{font-family:'Bricolage Grotesque',system-ui,sans-serif;background:var(--tint-b);color:var(--ink);}
+tr:last-child td{border-bottom:0;}
+
+.steps{list-style:none;margin:14px 0 0;padding:0;counter-reset:s;max-width:44em;}
+.steps li{counter-increment:s;position:relative;padding:0 0 18px 56px;}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:38px;height:38px;border-radius:50%;background:var(--c,var(--yellow));color:var(--cc,#0B1F4D);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;}
+.steps li:nth-child(3n+2){--c:var(--blue);--cc:#fff;}
+.steps li:nth-child(3n){--c:var(--red);--cc:#fff;}
+.steps b{font-family:'Bricolage Grotesque',system-ui,sans-serif;display:block;margin-bottom:2px;}
+.steps p{margin:0;}
+
+.timeline{list-style:none;margin:10px 0 0;padding:0 0 0 30px;border-left:4px solid var(--border);}
+.timeline li{position:relative;padding:0 0 22px 22px;max-width:46em;}
+.timeline li::before{content:"";position:absolute;left:-44px;top:7px;width:18px;height:18px;border-radius:50%;background:var(--c,var(--yellow));border:4px solid var(--surface);box-shadow:0 0 0 2px var(--c,var(--yellow));}
+.timeline li:nth-child(3n+1){--c:var(--yellow);}
+.timeline li:nth-child(3n+2){--c:var(--blue);}
+.timeline li:nth-child(3n){--c:var(--red);}
+.timeline .yr{display:block;font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:1.15rem;color:var(--ink);}
+.timeline p{margin:2px 0 0;}
+
+.chart{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px 12px;margin:20px 0;max-width:44em;}
+.alt .chart{background:var(--bg);}
+.chart h4{margin-bottom:12px;}
+.bar{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:12px;align-items:center;margin:0 0 10px;font-size:.95rem;line-height:1.3;}
+.bar .track{background:var(--tint-b);border-radius:8px;height:30px;position:relative;overflow:hidden;}
+.bar .fill{height:100%;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:700;font-size:.9rem;}
+.bar .fill.y{background:var(--yellow);color:#0B1F4D;}
+.bar .fill.r{background:var(--red);}
+.chart .note{margin:8px 0 6px;}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:10px;}
+.tile{border-radius:16px;padding:18px 20px 6px;background:var(--tint-b);}
+.tile:nth-child(3n+1){background:var(--tint-y);}
+.tile:nth-child(3n){background:var(--tint-r);}
+.tile h4{color:var(--ink);}
+.tile p{font-size:.98rem;line-height:1.6;}
+
+ul.plain{padding-left:1.2em;margin:0 0 1em;max-width:42em;}
+ul.plain li{margin-bottom:.4em;}
+ol.legend{list-style:none;margin:0;padding:0;max-width:42em;}
+ol.legend li{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;margin-bottom:12px;}
+ol.legend .n{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:.9rem;}
+ol.legend li:first-child .n{background:var(--red);}
+ol.legend p{margin:0;font-size:.97rem;line-height:1.55;}
+
+footer{background:var(--blue);color:#fff;padding:40px 0 34px;position:relative;}
+footer::before{content:"";position:absolute;left:0;right:0;top:-6px;height:6px;background:linear-gradient(90deg,var(--yellow) 0 50%,#fff 50% 50%,var(--red) 75% 100%);}
+footer .wrap{display:grid;gap:12px;}
+footer p{margin:0;max-width:56em;font-size:.93rem;line-height:1.6;}
+footer .name{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:1.4rem;}
+footer ul{margin:0;padding-left:1.2em;font-size:.9rem;line-height:1.6;max-width:56em;}
+footer a{color:var(--yellow);}
+
+svg text{font-family:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;}
+
+@media (max-width:900px){
+  .hero-grid,.split{grid-template-columns:1fr;gap:28px;}
+  .split.rev > :first-child{order:0;}
+  .sticky{position:static;}
+  .facts dl{grid-template-columns:repeat(2,1fr);}
+  .sec{padding:68px 0 56px;}
+  .brand{font-size:1.05rem;}
+}
+@media (max-width:520px){
+  .wrap{padding:0 16px;}
+  .hero{padding:36px 0 44px;}
+  .hero figure{box-shadow:6px 6px 0 var(--red);}
+  body{font-size:1rem;}
+  .bar{grid-template-columns:1fr;gap:4px;}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#topo">Transporte<br>na Colômbia</a>
+    <nav aria-label="Seções do site">
+      <ul>
+        <li><a href="#introducao">Introdução</a></li>
+        <li><a href="#publico">Transporte público</a></li>
+        <li><a href="#transmilenio">Bogotá e TransMilenio</a></li>
+        <li><a href="#metro">Metrô de Medellín</a></li>
+        <li><a href="#metrocable">Metrocable</a></li>
+        <li><a href="#mobilidade">Mobilidade urbana</a></li>
+        <li><a href="#sustentavel">Sustentável</a></li>
+        <li><a href="#desafios">Desafios</a></li>
+        <li><a href="#impactos">Impactos</a></li>
+        <li><a href="#curiosidades">Curiosidades</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="topo" aria-labelledby="titulo">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 id="titulo">Transporte inteligente na Colômbia</h1>
+      <p class="lead">Como ônibus de corredor exclusivo, metrô, teleféricos e bicicletas ajudam milhões de colombianos a se deslocar entre montanhas, trânsito intenso e grandes diferenças entre bairros.</p>
+      <div class="btns">
+        <a class="btn primary" href="#introducao">Começar a leitura</a>
+        <a class="btn ghost" href="#curiosidades">Ver curiosidades</a>
+      </div>
+    </div>
+    <figure>
+      <svg viewBox="0 0 560 400" role="img" aria-label="Ilustração de uma cidade colombiana de montanha com ônibus articulado vermelho em corredor exclusivo, trem de metrô elevado e teleférico subindo uma encosta com casas">
+        <defs>
+          <linearGradient id="hSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FA6EE"/><stop offset="1" stop-color="#FFE9A8"/></linearGradient>
+        </defs>
+        <rect width="560" height="400" fill="url(#hSky)"/>
+        <circle cx="90" cy="70" r="30" fill="#FCD116"/>
+        <path d="M0 250 L70 160 L130 215 L210 130 L290 220 L370 150 L450 210 L560 140 L560 400 L0 400Z" fill="#4C78C4"/>
+        <path d="M210 130 L192 160 L202 156 L210 166 L220 155 L230 160Z" fill="#fff" opacity=".9"/>
+        <path d="M0 300 C80 270 160 285 240 300 L560 300 L560 400 L0 400Z" fill="#2E8B57"/>
+        <path d="M290 305 L560 130 L560 400 L290 400Z" fill="#1F7A47"/>
+        <g>
+          <rect x="332" y="270" width="16" height="13" fill="#FCD116"/><rect x="356" y="254" width="16" height="13" fill="#CE1126"/>
+          <rect x="380" y="240" width="16" height="13" fill="#FFFFFF"/><rect x="402" y="224" width="16" height="13" fill="#003893"/>
+          <rect x="344" y="296" width="16" height="13" fill="#FFFFFF"/><rect x="370" y="280" width="16" height="13" fill="#FCD116"/>
+          <rect x="396" y="264" width="16" height="13" fill="#CE1126"/><rect x="424" y="246" width="16" height="13" fill="#FCD116"/>
+          <rect x="450" y="228" width="16" height="13" fill="#FFFFFF"/><rect x="474" y="210" width="16" height="13" fill="#CE1126"/>
+          <rect x="500" y="192" width="16" height="13" fill="#003893"/><rect x="522" y="176" width="16" height="13" fill="#FCD116"/>
+        </g>
+        <g stroke="#14203C" stroke-width="2" fill="none">
+          <line x1="318" y1="250" x2="545" y2="108"/>
+          <line x1="430" y1="180" x2="430" y2="230"/>
+        </g>
+        <rect x="422" y="176" width="16" height="6" fill="#14203C"/>
+        <rect x="304" y="246" width="24" height="26" fill="#14203C"/><rect x="535" y="98" width="22" height="22" fill="#14203C"/>
+        <g stroke="#14203C" stroke-width="2"><line x1="372" y1="209" x2="372" y2="216"/><line x1="486" y1="138" x2="486" y2="145"/></g>
+        <rect x="360" y="216" width="24" height="17" rx="3" fill="#CE1126"/><rect x="474" y="145" width="24" height="17" rx="3" fill="#FCD116"/>
+        <rect x="365" y="220" width="14" height="6" fill="#fff"/><rect x="479" y="149" width="14" height="6" fill="#fff"/>
+        <g fill="#8A94AD"><rect x="50" y="228" width="10" height="72"/><rect x="130" y="228" width="10" height="72"/><rect x="210" y="228" width="10" height="72"/></g>
+        <rect x="30" y="218" width="230" height="12" fill="#5B6684"/>
+        <rect x="90" y="196" width="120" height="24" rx="8" fill="#fff"/>
+        <rect x="90" y="209" width="120" height="5" fill="#003893"/>
+        <g fill="#6FA6EE"><rect x="98" y="200" width="14" height="8"/><rect x="118" y="200" width="14" height="8"/><rect x="138" y="200" width="14" height="8"/><rect x="158" y="200" width="14" height="8"/><rect x="178" y="200" width="14" height="8"/></g>
+        <rect y="330" width="560" height="70" fill="#3A4256"/>
+        <g stroke="#FCD116" stroke-width="3" stroke-dasharray="26 18"><line x1="0" y1="365" x2="560" y2="365"/></g>
+        <g>
+          <rect x="70" y="300" width="100" height="40" rx="7" fill="#CE1126"/>
+          <rect x="176" y="300" width="100" height="40" rx="7" fill="#CE1126"/>
+          <rect x="166" y="306" width="18" height="30" fill="#8E0D1B"/>
+          <g fill="#E7F0FF"><rect x="80" y="308" width="18" height="14"/><rect x="104" y="308" width="18" height="14"/><rect x="128" y="308" width="18" height="14"/><rect x="190" y="308" width="18" height="14"/><rect x="214" y="308" width="18" height="14"/><rect x="238" y="308" width="18" height="14"/></g>
+          <rect x="70" y="328" width="206" height="5" fill="#FCD116"/>
+          <circle cx="102" cy="342" r="11" fill="#14203C"/><circle cx="214" cy="342" r="11" fill="#14203C"/><circle cx="252" cy="342" r="11" fill="#14203C"/>
+        </g>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<div class="facts">
+  <dl>
+    <div><dt>1995</dt><dd>Início do metrô de Medellín (Linha A)</dd></div>
+    <div><dt>2000</dt><dd>TransMilenio começa a operar em Bogotá</dd></div>
+    <div><dt>2004</dt><dd>Primeiro Metrocable de Medellín (Linha K)</dd></div>
+    <div><dt>2018</dt><dd>TransMiCable, o primeiro teleférico de Bogotá</dd></div>
+    <div><dt>Em obras</dt><dd>Linha 1 do Metrô de Bogotá</dd></div>
+  </dl>
+</div>
+<div class="redband" aria-hidden="true"></div>
+
+<!-- 1. INTRODUÇÃO -->
+<section class="sec" id="introducao" aria-labelledby="h-intro">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-intro"><span class="stop" aria-hidden="true">1</span>Introdução</h2>
+      <p>Transporte inteligente é um conjunto de meios de deslocamento que funcionam de forma integrada, com informação, pagamento unificado e veículos mais limpos, para levar mais pessoas, com menos tempo e menos poluição.</p>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3 style="margin-top:0">O que significa “inteligente”</h3>
+        <p>O termo não se refere só a veículos modernos. Ele descreve a forma como o sistema inteiro é organizado: os diferentes meios de transporte se conectam, uma única forma de pagamento vale para vários deles e a operação é planejada e acompanhada de modo central.</p>
+        <p>Nas cidades colombianas, isso aparece em exemplos concretos: o cartão <strong>TuLlave</strong>, em Bogotá, e o cartão <strong>Cívica</strong>, em Medellín, dão acesso a vários meios de transporte. Os ônibus do TransMilenio andam em faixas exclusivas. Os trens da futura Linha 1 do metrô de Bogotá serão automáticos. E parte da frota já é elétrica.</p>
+        <h3>Por que isso importa na Colômbia</h3>
+        <p>O relevo explica muito. A Cordilheira dos Andes divide o país em vales e planaltos, e grande parte da população vive em cidades construídas entre montanhas. Bogotá fica a 2.640 metros de altitude, e Medellín ocupa o estreito Vale de Aburrá, com bairros que sobem as encostas.</p>
+        <p>Nesse cenário, não basta alargar ruas. Por isso as cidades apostaram em ônibus de corredor exclusivo, metrô elevado, bondes, teleféricos urbanos e ciclovias. A seguir, você vê como cada um desses sistemas funciona.</p>
+      </div>
+      <figure>
+        <div class="fig">
+          <svg viewBox="0 0 360 370" role="img" aria-label="Mapa esquemático da Colômbia com sete cidades numeradas: Bogotá, Medellín, Cali, Barranquilla, Cartagena, Bucaramanga e Pereira">
+            <rect width="360" height="370" fill="#CFE6FA"/>
+            <polygon transform="translate(40 10)" points="174,12 146,26 116,36 104,40 90,52 86,70 64,86 52,88 42,116 50,150 58,182 24,224 24,236 50,244 74,256 94,262 110,280 150,308 202,344 212,344 212,282 208,260 258,236 244,204 250,180 252,136 204,138 200,118 160,120 150,100 140,76 144,50 162,22" fill="#FCD116" stroke="#003893" stroke-width="3" stroke-linejoin="round"/>
+            <g font-size="12" font-weight="800" text-anchor="middle" fill="#fff">
+              <circle cx="158.6" cy="175.8" r="12" fill="#CE1126" stroke="#fff" stroke-width="2"/><text x="158.6" y="180">1</text>
+              <circle cx="128.6" cy="145" r="10" fill="#003893" stroke="#fff" stroke-width="2"/><text x="128.6" y="149">2</text>
+              <circle cx="109.4" cy="201" r="10" fill="#003893" stroke="#fff" stroke-width="2"/><text x="109.4" y="205">3</text>
+              <circle cx="148" cy="46" r="10" fill="#003893" stroke="#fff" stroke-width="2"/><text x="148" y="50">4</text>
+              <circle cx="126" cy="66" r="10" fill="#003893" stroke="#fff" stroke-width="2"/><text x="126" y="70">5</text>
+              <circle cx="177.6" cy="127.6" r="10" fill="#003893" stroke="#fff" stroke-width="2"/><text x="177.6" y="131.6">6</text>
+              <circle cx="122" cy="176" r="10" fill="#003893" stroke="#fff" stroke-width="2"/><text x="122" y="180">7</text>
+            </g>
+            <g font-size="14" font-style="italic" fill="#1B4F96"><text x="14" y="60">Mar do Caribe</text><text x="14" y="270">Oceano Pacífico</text></g>
+            <text x="12" y="358" font-size="11" fill="#1B4F96">Esquema simplificado, fora de escala.</text>
+          </svg>
+        </div>
+        <figcaption>Cidades com sistemas de transporte de massa. Veja a lista ao lado, abaixo da figura.</figcaption>
+        <ol class="legend" style="margin-top:14px">
+          <li><span class="n">1</span><p><strong>Bogotá:</strong> TransMilenio, ônibus zonais, TransMiCable e Linha 1 do metrô em obras.</p></li>
+          <li><span class="n">2</span><p><strong>Medellín:</strong> metrô, Metrocable, bonde, Metroplús e bicicletas compartilhadas.</p></li>
+          <li><span class="n">3</span><p><strong>Cali:</strong> MIO, sistema de ônibus em corredores, e MIO Cable.</p></li>
+          <li><span class="n">4</span><p><strong>Barranquilla:</strong> Transmetro.</p></li>
+          <li><span class="n">5</span><p><strong>Cartagena:</strong> Transcaribe.</p></li>
+          <li><span class="n">6</span><p><strong>Bucaramanga:</strong> Metrolínea.</p></li>
+          <li><span class="n">7</span><p><strong>Pereira:</strong> Megabús.</p></li>
+        </ol>
+      </figure>
+    </div>
+
+    <h3>Quatro ideias que sustentam o transporte inteligente</h3>
+    <div class="pillars">
+      <article class="pillar">
+        <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="12" cy="26" r="7" fill="#003893"/><circle cx="40" cy="12" r="7" fill="#CE1126"/><circle cx="40" cy="40" r="7" fill="#FCD116" stroke="#14203C" stroke-width="2"/><path d="M18 24 L34 14 M18 28 L34 38" stroke="#14203C" stroke-width="3" fill="none"/></svg>
+        <h4>Integração</h4>
+        <p>Ônibus, metrô, teleférico e bonde se conectam, para que a pessoa troque de meio sem recomeçar a viagem.</p>
+      </article>
+      <article class="pillar">
+        <svg viewBox="0 0 52 52" aria-hidden="true"><rect x="4" y="12" width="44" height="28" rx="5" fill="#003893"/><rect x="4" y="18" width="44" height="6" fill="#FCD116"/><rect x="10" y="30" width="14" height="4" rx="2" fill="#fff"/></svg>
+        <h4>Pagamento único</h4>
+        <p>Um mesmo cartão vale em vários meios de transporte, como o TuLlave em Bogotá e o Cívica em Medellín.</p>
+      </article>
+      <article class="pillar">
+        <svg viewBox="0 0 52 52" aria-hidden="true"><rect x="5" y="9" width="42" height="28" rx="4" fill="none" stroke="#14203C" stroke-width="3"/><path d="M10 31 L19 22 L26 27 L38 14" stroke="#CE1126" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="18" y="41" width="16" height="4" rx="2" fill="#14203C"/></svg>
+        <h4>Operação planejada</h4>
+        <p>Corredores exclusivos, controle da frota e, na Linha 1 de Bogotá, trens totalmente automáticos.</p>
+      </article>
+      <article class="pillar">
+        <svg viewBox="0 0 52 52" aria-hidden="true"><path d="M30 4 L14 28 H25 L22 48 L40 22 H29Z" fill="#FCD116" stroke="#14203C" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <h4>Energia mais limpa</h4>
+        <p>Metrô, bonde e teleféricos são elétricos, e Bogotá vem renovando sua frota com ônibus elétricos.</p>
+      </article>
+    </div>
+    <p class="note" style="margin-top:22px">Informações com data: a situação descrita nesta página reflete as fontes consultadas até outubro de 2026. Obras, linhas e números mudam com o tempo.</p>
+  </div>
+</section>
+
+<!-- 2. TRANSPORTE PÚBLICO -->
+<section class="sec alt b" id="publico" aria-labelledby="h-pub">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-pub"><span class="stop" aria-hidden="true">2</span>Transporte público</h2>
+      <p>As cidades colombianas combinam ônibus em corredores exclusivos, ônibus comuns, um metrô, um bonde, teleféricos, táxis e motocicletas. Cada cidade tem um desenho próprio.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <h4>Ônibus de corredor exclusivo (BRT)</h4>
+        <p class="where">TransMilenio, MIO, Transmetro, Transcaribe, Megabús, Metrolínea, Metroplús</p>
+        <p>Ônibus grandes que andam em faixas separadas do trânsito comum, com estações elevadas. É o principal sistema de massa da maioria das cidades colombianas.</p>
+      </article>
+      <article class="card">
+        <h4>Ônibus alimentadores e zonais</h4>
+        <p class="where">Bogotá (SITP), Medellín (Metroplús e linhas integradas)</p>
+        <p>Atendem os bairros e levam os passageiros até as estações. Em Bogotá, o SITP integra ônibus de várias categorias ao TransMilenio.</p>
+      </article>
+      <article class="card">
+        <h4>Metrô</h4>
+        <p class="where">Medellín (em operação) e Bogotá (em obras)</p>
+        <p>O metrô de Medellín é o único sistema ferroviário urbano de massa em funcionamento no país. Bogotá constrói a Linha 1, em viaduto elevado.</p>
+      </article>
+      <article class="card">
+        <h4>Bonde</h4>
+        <p class="where">Medellín</p>
+        <p>O Tranvía de Ayacucho (Linha T) liga o centro à região leste e se conecta a dois teleféricos.</p>
+      </article>
+      <article class="card">
+        <h4>Teleféricos urbanos</h4>
+        <p class="where">Medellín, Bogotá, Cali e Manizales</p>
+        <p>Cabines suspensas por cabos sobem as encostas e ligam bairros de morro ao restante da cidade.</p>
+      </article>
+      <article class="card">
+        <h4>Táxis, motos e outros</h4>
+        <p class="where">Em todo o país</p>
+        <p>Táxis, motocicletas e ônibus intermunicipais completam a oferta. Entre cidades separadas por cordilheiras, os voos domésticos são muito usados, e em regiões da Amazônia e do Pacífico os barcos são parte do deslocamento diário.</p>
+      </article>
+    </div>
+
+    <h3>Os sistemas de massa das cidades</h3>
+    <p>Depois do TransMilenio, outras cidades colombianas criaram seus próprios sistemas integrados de transporte de massa. Estes são os principais, com o ano de início de operação segundo um estudo de caso apresentado em 2018 por uma instituição financeira internacional:</p>
+    <div class="scroll" role="region" aria-label="Sistemas de transporte de massa" tabindex="0">
+      <table>
+        <thead><tr><th>Cidade</th><th>Sistema</th><th>Tipo</th><th>Início</th></tr></thead>
+        <tbody>
+          <tr><td>Bogotá</td><td>TransMilenio</td><td>Ônibus de corredor exclusivo (BRT)</td><td>2000</td></tr>
+          <tr><td>Medellín</td><td>Metrô de Medellín</td><td>Metrô elevado</td><td>1995</td></tr>
+          <tr><td>Pereira</td><td>Megabús</td><td>BRT</td><td>2006</td></tr>
+          <tr><td>Cali</td><td>MIO</td><td>BRT</td><td>2008</td></tr>
+          <tr><td>Bucaramanga</td><td>Metrolínea</td><td>BRT</td><td>2009</td></tr>
+          <tr><td>Barranquilla</td><td>Transmetro</td><td>BRT</td><td>2010</td></tr>
+          <tr><td>Cartagena</td><td>Transcaribe</td><td>BRT</td><td>2015 a 2016</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Em Medellín, o Metroplús, também um BRT, complementa o metrô. As fontes divergem sobre o mês exato de abertura de alguns sistemas, por isso a tabela traz só o ano.</p>
+  </div>
+</section>
+
+<!-- 3. BOGOTÁ E O TRANSMILENIO -->
+<section class="sec r" id="transmilenio" aria-labelledby="h-tm">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-tm"><span class="stop" aria-hidden="true">3</span>Bogotá e o TransMilenio</h2>
+      <p>O TransMilenio é o sistema de ônibus rápidos de Bogotá, inaugurado em dezembro de 2000. Tornou-se uma referência internacional de BRT.</p>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3 style="margin-top:0">Como surgiu</h3>
+        <p>Antes dele, o transporte coletivo de Bogotá era feito por milhares de micro-ônibus de donos diferentes, sem coordenação entre si. O TransMilenio reorganizou esse cenário com uma empresa pública que planeja e fiscaliza o sistema e com empresas privadas que operam os ônibus.</p>
+        <p>O projeto foi inspirado em experiências de BRT do Brasil, como a de Curitiba, e do Equador, mas em Bogotá ganhou escala maior, com estações grandes, faixas de ultrapassagem e serviços expressos. O primeiro trecho começou a funcionar em dezembro de 2000, menos de três anos depois do início do projeto.</p>
+        <p>Hoje, o sistema atende Bogotá e a cidade vizinha de Soacha. Segundo a Wikipédia, tem 12 linhas e cerca de 150 estações.</p>
+      </div>
+      <figure>
+        <div class="fig">
+          <svg viewBox="0 0 560 330" role="img" aria-label="Ilustração de uma estação elevada do TransMilenio no centro de uma avenida, com ônibus articulado vermelho, passageiros e prédios ao fundo">
+            <rect width="560" height="330" fill="#DCEBFA"/>
+            <g fill="#8FA6C9"><rect x="10" y="90" width="60" height="170"/><rect x="80" y="60" width="50" height="200"/><rect x="140" y="110" width="70" height="150"/><rect x="380" y="70" width="60" height="190"/><rect x="450" y="100" width="100" height="160"/></g>
+            <g fill="#C5D4EC"><rect x="20" y="102" width="12" height="10"/><rect x="40" y="102" width="12" height="10"/><rect x="20" y="130" width="12" height="10"/><rect x="40" y="130" width="12" height="10"/><rect x="90" y="76" width="10" height="10"/><rect x="108" y="76" width="10" height="10"/><rect x="90" y="104" width="10" height="10"/><rect x="108" y="104" width="10" height="10"/><rect x="392" y="86" width="12" height="10"/><rect x="412" y="86" width="12" height="10"/><rect x="392" y="114" width="12" height="10"/><rect x="412" y="114" width="12" height="10"/></g>
+            <rect y="260" width="560" height="70" fill="#3A4256"/>
+            <g stroke="#fff" stroke-width="3" stroke-dasharray="22 16" opacity=".8"><line x1="0" y1="300" x2="560" y2="300"/></g>
+            <rect x="130" y="196" width="300" height="12" fill="#6B7590"/>
+            <rect x="130" y="130" width="300" height="66" fill="#B7D3F2" opacity=".75" stroke="#003893" stroke-width="3"/>
+            <rect x="120" y="116" width="320" height="14" rx="3" fill="#003893"/>
+            <g stroke="#003893" stroke-width="3"><line x1="190" y1="130" x2="190" y2="196"/><line x1="250" y1="130" x2="250" y2="196"/><line x1="310" y1="130" x2="310" y2="196"/><line x1="370" y1="130" x2="370" y2="196"/></g>
+            <rect x="250" y="102" width="60" height="14" rx="3" fill="#FCD116"/><text x="280" y="113" font-size="10" font-weight="800" text-anchor="middle" fill="#0B1F4D">ESTAÇÃO</text>
+            <g fill="#14203C"><circle cx="162" cy="166" r="6"/><rect x="157" y="173" width="10" height="22" rx="4"/><circle cx="222" cy="166" r="6"/><rect x="217" y="173" width="10" height="22" rx="4"/><circle cx="342" cy="166" r="6"/><rect x="337" y="173" width="10" height="22" rx="4"/><circle cx="402" cy="166" r="6"/><rect x="397" y="173" width="10" height="22" rx="4"/></g>
+            <g>
+              <rect x="70" y="214" width="190" height="46" rx="8" fill="#CE1126"/>
+              <rect x="266" y="214" width="190" height="46" rx="8" fill="#CE1126"/>
+              <rect x="254" y="220" width="20" height="36" fill="#8E0D1B"/>
+              <g fill="#E7F0FF"><rect x="82" y="222" width="22" height="16"/><rect x="110" y="222" width="22" height="16"/><rect x="138" y="222" width="22" height="16"/><rect x="166" y="222" width="22" height="16"/><rect x="194" y="222" width="22" height="16"/><rect x="222" y="222" width="22" height="16"/><rect x="278" y="222" width="22" height="16"/><rect x="306" y="222" width="22" height="16"/><rect x="334" y="222" width="22" height="16"/><rect x="362" y="222" width="22" height="16"/><rect x="390" y="222" width="22" height="16"/><rect x="418" y="222" width="22" height="16"/></g>
+              <rect x="70" y="246" width="386" height="6" fill="#FCD116"/>
+              <circle cx="120" cy="262" r="12" fill="#14203C"/><circle cx="240" cy="262" r="12" fill="#14203C"/><circle cx="360" cy="262" r="12" fill="#14203C"/><circle cx="430" cy="262" r="12" fill="#14203C"/>
+            </g>
+          </svg>
+        </div>
+        <figcaption>Estação elevada no centro da avenida, onde os ônibus articulados vermelhos param em faixa exclusiva.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Como funciona</h3>
+    <ol class="steps">
+      <li><b>Do bairro à estação</b><p>Ônibus alimentadores e zonais recolhem os passageiros nos bairros e os levam até uma estação ou um portal (terminais nas pontas do sistema, como o Portal 80, o Portal Américas e o Portal El Tunal).</p></li>
+      <li><b>Pagamento antes de embarcar</b><p>O passageiro valida o cartão TuLlave na entrada da estação. O mesmo cartão vale para os ônibus do SITP e para o TransMiCable.</p></li>
+      <li><b>Corredor exclusivo</b><p>As estações ficam no centro das grandes avenidas, chamadas de troncais, com plataformas elevadas no nível do piso dos ônibus. Os articulados vermelhos andam em faixas próprias, com serviços que param em todas as estações e serviços expressos.</p></li>
+      <li><b>Conexão e transbordo</b><p>Quem muda de ônibus, de estação ou de sistema dentro de um limite de tempo não paga outra passagem. A janela era de 125 minutos, e o Concelho de Bogotá aprovou, em agosto de 2026, ampliá-la para 150, segundo a imprensa local.</p></li>
+    </ol>
+
+    <h3>Importância e uso pela população</h3>
+    <p>O TransMilenio é uma das principais formas de se deslocar na capital. Uma reportagem de 2019 citou cerca de 2,5 milhões de passageiros por dia somente nos corredores troncais, e analistas apontaram que o sistema já mostrava sinais de saturação em alguns trechos.</p>
+    <p>Há corredores com certificação internacional de qualidade de BRT, e vários trechos importantes foram acrescentados depois do primeiro, como as troncais da Calle 26, da Carrera 10 e da Calle 6, a partir de 2012. Novas troncais, como as da Carrera 68 e da Avenida Ciudad de Cali, estão em implantação.</p>
+
+    <h3>O metrô de Bogotá: Linha 1</h3>
+    <p>A capital está construindo sua primeira linha de metrô. Segundo a Prefeitura e a Empresa Metro de Bogotá:</p>
+    <ul class="chips">
+      <li><b>Traçado:</b> cerca de 24 km (23,9 km), de Bosa até a Calle 72 com a Avenida Caracas, em viaduto elevado.</li>
+      <li><b>Estações e trens:</b> 16 estações e 30 trens de seis vagões, totalmente automáticos, cada um com 134 m e capacidade de 1.800 passageiros.</li>
+      <li><b>Obra:</b> 83,73% de avanço geral em setembro de 2026, segundo a Prefeitura; 20 dos 30 trens já estavam no país.</li>
+      <li><b>Integração:</b> o metrô será conectado ao TransMilenio, como na estação 2, ligada ao Portal Américas.</li>
+      <li><b>Testes:</b> uma fase de “marcha branca”, com testes sem passageiros, antecede a abertura.</li>
+      <li><b>Próximo passo:</b> a Linha 2 está na fase de pré-qualificação de empresas, segundo a Prefeitura.</li>
+    </ul>
+
+    <h3>TransMiCable</h3>
+    <p>O TransMiCable é um teleférico que alimenta o TransMilenio na localidade de Ciudad Bolívar, no sul da cidade. Foi inaugurado em dezembro de 2018, tem quatro estações (Tunal, Juan Pablo II, Manitas e Mirador del Paraíso) e é elétrico. Segundo a Prefeitura, a viagem até o Portal El Tunal passou a levar 13 minutos, num trajeto que antes podia levar 50 minutos.</p>
+  </div>
+</section>
+
+<!-- 4. MEDELLÍN E O METRÔ -->
+<section class="sec alt" id="metro" aria-labelledby="h-metro">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-metro"><span class="stop" aria-hidden="true">4</span>Medellín e o metrô</h2>
+      <p>O metrô de Medellín, inaugurado em 1995, é o único sistema de metrô ferroviário em operação na Colômbia e o eixo de todo o transporte do Vale de Aburrá.</p>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3 style="margin-top:0">Como é o sistema</h3>
+        <ul class="plain">
+          <li><strong>Linha A:</strong> tem cerca de 25,8 km e 21 estações, de Niquía (norte) a La Estrella (sul), seguindo o rio Medellín. Parte do traçado é em viaduto elevado. A viagem completa leva cerca de 36 minutos.</li>
+          <li><strong>Linha B:</strong> tem cerca de 5,5 km e liga a estação San Antonio, no centro, a San Javier, no oeste, em cerca de 11 minutos.</li>
+          <li><strong>Bonde de Ayacucho (Linha T):</strong> 4,2 km entre San Antonio e Oriente, aberto em 2016.</li>
+        </ul>
+        <p>A obra começou em 1985, e a primeira operação comercial, entre Acevedo e El Poblado, ocorreu em 30 de novembro de 1995. A empresa responsável foi criada em 1979, com participação igual do Departamento de Antioquia e do município de Medellín.</p>
+        <h3>Integração com outros meios</h3>
+        <p>O metrô faz parte do SITVA, o Sistema Integrado de Transporte do Vale de Aburrá. Ele reúne metrô, bonde, Metrocable, o BRT Metroplús, ônibus alimentadores e o sistema de bicicletas EnCicla. Tudo funciona com tarifa integrada e um só cartão, o Cívica.</p>
+        <h3>Importância para os moradores</h3>
+        <p>Para muita gente em Medellín, o metrô é mais do que transporte. A chamada <em>Cultura Metro</em>, programa de educação cívica sobre cuidado com as estações e convivência, começou em 1988, antes mesmo de as primeiras estações ficarem prontas. Medellín é conhecida pelos moradores como a cidade onde o metrô é um símbolo de orgulho coletivo.</p>
+      </div>
+      <figure>
+        <div class="fig">
+          <svg viewBox="0 0 560 350" role="img" aria-label="Esquema simplificado das linhas do metrô de Medellín: Linha A, Linha B, bonde T e teleféricos">
+            <rect width="560" height="350" fill="#F4F7FD"/>
+            <g stroke="#7B87A6" stroke-width="3" stroke-dasharray="6 6" fill="none">
+              <path d="M130 200 L88 140"/><path d="M88 140 L58 92"/>
+              <path d="M150 238 L112 296"/>
+              <path d="M430 150 L470 100"/><path d="M380 150 L380 104"/>
+            </g>
+            <path d="M40 200 L520 200" stroke="#003893" stroke-width="10" stroke-linecap="round"/>
+            <path d="M290 200 L250 240 L150 240" stroke="#CE1126" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M290 200 L330 150 L430 150" stroke="#FCD116" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <g fill="#fff" stroke="#14203C" stroke-width="3">
+              <circle cx="40" cy="200" r="8"/><circle cx="130" cy="200" r="8"/><circle cx="290" cy="200" r="11"/><circle cx="400" cy="200" r="8"/><circle cx="470" cy="200" r="8"/><circle cx="520" cy="200" r="8"/>
+              <circle cx="150" cy="240" r="8"/><circle cx="430" cy="150" r="8"/><circle cx="380" cy="150" r="7"/>
+              <circle cx="88" cy="140" r="6"/><circle cx="58" cy="92" r="6"/><circle cx="112" cy="296" r="6"/><circle cx="470" cy="100" r="6"/><circle cx="380" cy="104" r="6"/>
+            </g>
+            <g font-size="16" font-weight="700" fill="#14203C">
+              <text x="40" y="228" text-anchor="middle">Niquía</text>
+              <text x="130" y="176" text-anchor="middle">Acevedo</text>
+              <text x="290" y="232" text-anchor="middle">San Antonio</text>
+              <text x="400" y="228" text-anchor="middle">Poblado</text>
+              <text x="520" y="228" text-anchor="middle">La Estrella</text>
+              <text x="150" y="268" text-anchor="middle">San Javier</text>
+              <text x="440" y="176" text-anchor="middle">Oriente</text>
+            </g>
+            <g font-size="14" fill="#4B5877">
+              <text x="96" y="120" text-anchor="start">Santo Domingo</text>
+              <text x="66" y="84">Arví</text>
+              <text x="120" y="316">La Aurora</text>
+              <text x="478" y="96">Villa Sierra</text>
+              <text x="392" y="100">Trece de Noviembre</text>
+            </g>
+            <g font-size="16" font-weight="800">
+              <rect x="400" y="262" width="26" height="8" fill="#003893"/><text x="434" y="271" fill="#14203C">Linha A</text>
+              <rect x="400" y="282" width="26" height="8" fill="#CE1126"/><text x="434" y="291" fill="#14203C">Linha B</text>
+              <rect x="400" y="302" width="26" height="8" fill="#FCD116"/><text x="434" y="311" fill="#14203C">Bonde (T)</text>
+            </g>
+            <text x="12" y="338" font-size="11" fill="#4B5877">Linhas tracejadas: Metrocable. Esquema simplificado, fora de escala.</text>
+          </svg>
+        </div>
+        <figcaption>As linhas se encontram na estação San Antonio, no centro. Os teleféricos (tracejados) partem das estações do metrô e do bonde.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 5. METROCABLE -->
+<section class="sec b" id="metrocable" aria-labelledby="h-mc">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-mc"><span class="stop" aria-hidden="true">5</span>Metrocable</h2>
+      <p>O Metrocable é o sistema de teleféricos urbanos de Medellín. Ele leva as cabines do metrô até bairros que ficam nas encostas, onde ruas íngremes dificultam o ônibus.</p>
+    </div>
+
+    <div class="split rev">
+      <div>
+        <h3 style="margin-top:0">Como funciona</h3>
+        <p>Cabines penduradas em um cabo de aço circulam entre estações, apoiadas em torres. O sistema é elétrico e opera como parte do metrô: o mesmo cartão Cívica vale no teleférico, e as estações de partida ficam ao lado de estações de metrô ou de bonde.</p>
+        <p>A vantagem é geográfica. Em vez de seguir ruas estreitas e muito inclinadas, o cabo sobe em linha reta sobre os telhados, o que encurta distâncias.</p>
+        <h3>Principais linhas</h3>
+        <ul class="plain">
+          <li><strong>Linha K (Acevedo a Santo Domingo):</strong> inaugurada em 2004, foi a primeira. Tem cerca de 2 km e quatro estações, e liga a Linha A do metrô a bairros do nordeste da cidade.</li>
+          <li><strong>Linha J (San Javier a La Aurora):</strong> parte do final da Linha B e atende bairros do oeste, como os da Comuna 13.</li>
+          <li><strong>Linha L (Santo Domingo a Arví):</strong> continua a Linha K até o Parque Arví, uma reserva natural. Tem perfil mais turístico e tarifa separada.</li>
+          <li><strong>Linhas H, M e P:</strong> mais recentes, ligam o bonde e a Linha A a outras encostas. A Linha P (Picacho) atende bairros das comunas 5 e 6 de Medellín e de Bello.</li>
+        </ul>
+        <p>Ao todo, o Metrocable tem seis linhas, segundo as fontes consultadas.</p>
+      </div>
+      <figure>
+        <div class="fig">
+          <svg viewBox="0 0 560 360" role="img" aria-label="Ilustração de um teleférico urbano subindo uma encosta com casas coloridas, com estação na base e estação no alto">
+            <defs><linearGradient id="mSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8EC5F5"/><stop offset="1" stop-color="#FFEFC2"/></linearGradient></defs>
+            <rect width="560" height="360" fill="url(#mSky)"/>
+            <path d="M0 330 L560 80 L560 360 L0 360Z" fill="#2E8B57"/>
+            <g>
+              <rect x="30" y="300" width="18" height="14" fill="#FCD116"/><rect x="70" y="282" width="18" height="14" fill="#CE1126"/><rect x="108" y="268" width="18" height="14" fill="#FFFFFF"/><rect x="146" y="250" width="18" height="14" fill="#003893"/>
+              <rect x="186" y="234" width="18" height="14" fill="#FCD116"/><rect x="224" y="218" width="18" height="14" fill="#CE1126"/><rect x="262" y="202" width="18" height="14" fill="#FFFFFF"/><rect x="300" y="186" width="18" height="14" fill="#FCD116"/>
+              <rect x="338" y="168" width="18" height="14" fill="#003893"/><rect x="376" y="152" width="18" height="14" fill="#CE1126"/><rect x="414" y="136" width="18" height="14" fill="#FCD116"/><rect x="452" y="120" width="18" height="14" fill="#FFFFFF"/>
+              <rect x="50" y="326" width="18" height="14" fill="#FFFFFF"/><rect x="100" y="312" width="18" height="14" fill="#003893"/><rect x="150" y="296" width="18" height="14" fill="#FCD116"/><rect x="200" y="280" width="18" height="14" fill="#CE1126"/>
+              <rect x="250" y="262" width="18" height="14" fill="#FFFFFF"/><rect x="300" y="244" width="18" height="14" fill="#FCD116"/><rect x="350" y="226" width="18" height="14" fill="#CE1126"/><rect x="400" y="208" width="18" height="14" fill="#003893"/>
+              <rect x="450" y="190" width="18" height="14" fill="#FCD116"/><rect x="500" y="172" width="18" height="14" fill="#FFFFFF"/>
+            </g>
+            <line x1="50" y1="240" x2="510" y2="40" stroke="#14203C" stroke-width="3"/>
+            <g stroke="#14203C" stroke-width="4"><line x1="200" y1="175" x2="200" y2="240"/><line x1="360" y1="106" x2="360" y2="176"/></g>
+            <g fill="#14203C"><rect x="190" y="170" width="20" height="6"/><rect x="350" y="101" width="20" height="6"/></g>
+            <rect x="26" y="228" width="48" height="36" rx="4" fill="#14203C"/><text x="50" y="251" font-size="9" font-weight="800" fill="#FCD116" text-anchor="middle">METRÔ</text>
+            <rect x="488" y="22" width="48" height="36" rx="4" fill="#14203C"/><text x="512" y="45" font-size="9" font-weight="800" fill="#FCD116" text-anchor="middle">BAIRRO</text>
+            <g stroke="#14203C" stroke-width="2"><line x1="130" y1="208" x2="130" y2="217"/><line x1="285" y1="140" x2="285" y2="149"/><line x1="440" y1="72" x2="440" y2="81"/></g>
+            <rect x="116" y="217" width="28" height="19" rx="3" fill="#CE1126"/><rect x="271" y="149" width="28" height="19" rx="3" fill="#FCD116"/><rect x="426" y="81" width="28" height="19" rx="3" fill="#CE1126"/>
+            <g fill="#fff"><rect x="121" y="221" width="18" height="7"/><rect x="276" y="153" width="18" height="7"/><rect x="431" y="85" width="18" height="7"/></g>
+            <g font-size="15" font-weight="700" fill="#14203C"><text x="24" y="285">Estação no vale</text><text x="296" y="26">Estação no alto do morro</text></g>
+          </svg>
+        </div>
+        <figcaption>Em vez de seguir ruas íngremes, o teleférico sobe em linha reta entre o vale e o morro.</figcaption>
+      </figure>
+    </div>
+
+    <aside class="fact b"><p><strong>Referência regional:</strong> a ideia do teleférico como transporte público de massa se espalhou. Hoje há sistemas parecidos em outras cidades, como Cali, Manizales e Bogotá, na Colômbia, e La Paz (Bolívia) e Caracas (Venezuela).</p></aside>
+    <p>Em Medellín, a Comuna 13 também tem escadas rolantes públicas ao ar livre, que ajudam a subir a encosta a pé, perto da estação San Javier. Como o Metrocable, elas mostram como a cidade adaptou a mobilidade ao relevo.</p>
+  </div>
+</section>
+
+<!-- 6. MOBILIDADE URBANA -->
+<section class="sec alt r" id="mobilidade" aria-labelledby="h-mob">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-mob"><span class="stop" aria-hidden="true">6</span>Mobilidade urbana</h2>
+      <p>Mobilidade urbana é a forma como as pessoas se movimentam todos os dias. Em Bogotá, isso envolve trânsito intenso, longos deslocamentos e uma tradição forte de bicicleta.</p>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3 style="margin-top:0">Trânsito e deslocamento diário</h3>
+        <p>Segundo dados da Secretaria de Mobilidade de Bogotá citados pela imprensa, a velocidade média das ruas da cidade é de cerca de 23 km/h. Em horário de pico, percorrer 10 km leva em média 51% mais tempo do que fora dele.</p>
+        <p>O Observatório de Mobilidade de Bogotá registrou, para o ano anterior ao de uma reportagem publicada em 2024, uma duração média de viagem de 54 minutos. Para quem usa transporte público, o tempo médio foi de 79 minutos, e para quem usa carro, 51 minutos.</p>
+        <p>As motocicletas ocupam espaço crescente nas ruas: segundo a mesma fonte, 27,2% dos domicílios colombianos têm uma moto, e Bogotá tem cerca de 390 mil motocicletas. Bogotá e Medellín também adotam o <em>pico y placa</em>, que restringe a circulação de carros em certos horários conforme o final da placa.</p>
+        <div class="chart">
+          <h4>Duração média das viagens em Bogotá (minutos)</h4>
+          <div class="bar"><span>Todas as viagens</span><div class="track"><div class="fill" style="width:68%">54</div></div></div>
+          <div class="bar"><span>Transporte público</span><div class="track"><div class="fill r" style="width:99%">79</div></div></div>
+          <div class="bar"><span>Carro</span><div class="track"><div class="fill y" style="width:64%">51</div></div></div>
+          <p class="note">Fonte: Observatório de Mobilidade de Bogotá, citado pela revista Cambio (dezembro de 2024).</p>
+        </div>
+      </div>
+      <figure>
+        <div class="fig">
+          <svg viewBox="0 0 560 360" role="img" aria-label="Ilustração de pessoas pedalando em uma rua fechada para carros, com prédios e montanhas ao fundo">
+            <rect width="560" height="360" fill="#BFE0FA"/>
+            <circle cx="470" cy="70" r="30" fill="#FCD116"/>
+            <path d="M0 200 L90 120 L170 190 L260 100 L350 190 L430 130 L560 200 L560 260 L0 260Z" fill="#6D8F7A"/>
+            <g fill="#8FA6C9"><rect x="20" y="170" width="50" height="100"/><rect x="80" y="150" width="44" height="120"/><rect x="430" y="160" width="60" height="110"/><rect x="498" y="180" width="50" height="90"/></g>
+            <rect y="262" width="560" height="98" fill="#4A5266"/>
+            <g stroke="#FCD116" stroke-width="3" stroke-dasharray="24 16"><line x1="0" y1="310" x2="560" y2="310"/></g>
+            <g stroke="#14203C" stroke-width="4" fill="none" stroke-linecap="round">
+              <circle cx="110" cy="300" r="22"/><circle cx="170" cy="300" r="22"/><path d="M110 300 L135 276 L170 300 M135 276 L158 276"/>
+              <circle cx="300" cy="320" r="22"/><circle cx="360" cy="320" r="22"/><path d="M300 320 L325 296 L360 320 M325 296 L348 296"/>
+              <circle cx="440" cy="296" r="22"/><circle cx="500" cy="296" r="22"/><path d="M440 296 L465 272 L500 296 M465 272 L488 272"/>
+            </g>
+            <g>
+              <circle cx="138" cy="254" r="9" fill="#E0A97D"/><path d="M130 262 L136 276 L124 288 M136 276 L148 280" stroke="#CE1126" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <circle cx="328" cy="274" r="9" fill="#8D5A3B"/><path d="M320 282 L326 296 L314 308 M326 296 L338 300" stroke="#003893" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <circle cx="468" cy="250" r="9" fill="#C98B5B"/><path d="M460 258 L466 272 L454 284 M466 272 L478 276" stroke="#FCD116" stroke-width="6" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+        <figcaption>Aos domingos e feriados, ruas importantes de Bogotá são reservadas a bicicletas e pedestres.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Ciclovias e bicicletas</h3>
+    <div class="cards">
+      <article class="card">
+        <h4>Ciclovía dominical</h4>
+        <p>Desde 1974, todo domingo e feriado, das 7h às 14h, ruas de Bogotá ficam fechadas aos carros para ciclistas, patinadores e pedestres. A Prefeitura divulgou 127,69 km em 2022 e 141,46 km em 2026, o que mostra que a extensão varia.</p>
+      </article>
+      <article class="card">
+        <h4>Ciclorrutas permanentes</h4>
+        <p>A cidade tem uma rede de ciclovias fixas, usadas durante a semana. A Prefeitura informou mais de 593 km em 2022 e mais de 677 km em 2025, além de mais de 79 mil vagas de bicicletário.</p>
+      </article>
+      <article class="card">
+        <h4>Viagens de bicicleta</h4>
+        <p>Segundo a Pesquisa de Mobilidade citada pela Prefeitura, Bogotá registra cerca de 880 mil viagens diárias de bicicleta, para o trabalho, a escola ou outras atividades.</p>
+      </article>
+    </div>
+    <p class="note" style="margin-top:14px">Em 2023, a Ciclovía recebeu um prêmio especial do Dia Mundial da Bicicleta, das Nações Unidas, e foi certificada como carbono neutro, segundo a Prefeitura.</p>
+  </div>
+</section>
+
+<!-- 7. TRANSPORTE SUSTENTÁVEL -->
+<section class="sec" id="sustentavel" aria-labelledby="h-sus">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-sus"><span class="stop" aria-hidden="true">7</span>Transporte sustentável</h2>
+      <p>Transporte sustentável reúne meios que gastam menos energia ou poluem menos que o carro com motor a combustão: a bicicleta, o transporte coletivo e os veículos elétricos.</p>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3 style="margin-top:0">Ônibus elétricos</h3>
+        <p>Bogotá vem trocando ônibus antigos do sistema por modelos elétricos. Segundo notícias de 2025, a Prefeitura anunciou que a frota elétrica do sistema chegaria a 1.850 ônibus com a renovação de parte da frota zonal.</p>
+        <p>Em março de 2026, chegou o primeiro lote de 68 ônibus elétricos feitos no país, de 711 que o sistema deve receber em 2026 e 2027. A Prefeitura estima que essa nova frota evitará 2.628 toneladas de CO₂ por ano. É uma estimativa oficial, e o resultado real depende de como os ônibus operam.</p>
+        <p>O sistema também recebeu os primeiros ônibus articulados elétricos duais da Colômbia, em 2026. Além dos ônibus, o TransMiCable é totalmente elétrico.</p>
+        <h3>Metrô, bonde e teleféricos</h3>
+        <p>O metrô e o bonde de Medellín e os teleféricos são movidos a eletricidade. Quando uma pessoa troca o carro por esses meios, ocupa bem menos espaço na rua por viagem. O mesmo é esperado do metrô de Bogotá, também elétrico.</p>
+        <h3>Bicicletas</h3>
+        <p>A bicicleta é o meio de menor impacto ambiental. Em Bogotá, a Ciclovía e as ciclorrutas apoiam esse uso. Em Medellín, o sistema EnCicla de bicicletas compartilhadas faz parte do sistema integrado do Vale de Aburrá.</p>
+      </div>
+      <figure>
+        <div class="fig">
+          <svg viewBox="0 0 560 340" role="img" aria-label="Ilustração de um ônibus elétrico vermelho carregando em um poste de recarga, com árvores e uma bicicleta ao lado">
+            <rect width="560" height="340" fill="#DDF0DA"/>
+            <circle cx="480" cy="64" r="30" fill="#FCD116"/>
+            <g fill="#2E8B57"><circle cx="60" cy="190" r="34"/><circle cx="96" cy="206" r="28"/><circle cx="500" cy="196" r="32"/></g>
+            <g fill="#6B4A2B"><rect x="55" y="210" width="10" height="46"/><rect x="495" y="214" width="10" height="42"/></g>
+            <rect y="256" width="560" height="84" fill="#4A5266"/>
+            <g stroke="#FCD116" stroke-width="3" stroke-dasharray="24 16"><line x1="0" y1="300" x2="560" y2="300"/></g>
+            <rect x="130" y="170" width="260" height="78" rx="10" fill="#CE1126"/>
+            <g fill="#E7F0FF"><rect x="144" y="182" width="32" height="26"/><rect x="184" y="182" width="32" height="26"/><rect x="224" y="182" width="32" height="26"/><rect x="264" y="182" width="32" height="26"/><rect x="304" y="182" width="32" height="26"/><rect x="344" y="182" width="32" height="26"/></g>
+            <rect x="130" y="222" width="260" height="8" fill="#FCD116"/>
+            <circle cx="190" cy="250" r="18" fill="#14203C"/><circle cx="340" cy="250" r="18" fill="#14203C"/>
+            <path d="M270 150 L248 172 H262 L256 192 L282 166 H268Z" fill="#FCD116" stroke="#14203C" stroke-width="2" stroke-linejoin="round" transform="translate(0 -12)"/>
+            <rect x="410" y="170" width="24" height="86" rx="4" fill="#003893"/>
+            <rect x="416" y="180" width="12" height="10" fill="#FCD116"/>
+            <path d="M410 214 Q380 214 388 230 L388 236" stroke="#14203C" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <g stroke="#14203C" stroke-width="4" fill="none" stroke-linecap="round"><circle cx="454" cy="288" r="18"/><circle cx="504" cy="288" r="18"/><path d="M454 288 L474 268 L504 288 M474 268 L494 268"/></g>
+          </svg>
+        </div>
+        <figcaption>Ônibus elétrico em recarga: não emite gases pelo escapamento.</figcaption>
+      </figure>
+    </div>
+
+    <aside class="fact"><p><strong>Veículo elétrico não é sinônimo de impacto zero.</strong> Ele evita a fumaça no escapamento, mas a eletricidade e a fabricação das baterias também têm origem e impacto. Por isso os números de redução de CO₂ são estimativas, calculadas sobre um período de uso da frota.</p></aside>
+  </div>
+</section>
+
+<!-- 8. DESAFIOS -->
+<section class="sec alt b" id="desafios" aria-labelledby="h-des">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-des"><span class="stop" aria-hidden="true">8</span>Desafios do transporte</h2>
+      <p>Apesar dos avanços, os sistemas colombianos enfrentam dificuldades. Esta seção descreve esses problemas com dados das fontes consultadas.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <h4>Congestionamento</h4>
+        <p>Em Bogotá, a velocidade média nas ruas é de cerca de 23 km/h, segundo a Secretaria de Mobilidade. Obras e o grande número de veículos mantêm o trânsito lento em horários de pico.</p>
+      </article>
+      <article class="card">
+        <h4>Superlotação</h4>
+        <p>A Empresa Metro de Bogotá afirma em seus relatórios que o sistema público apresenta altos níveis de saturação, com troncais acima da capacidade de projeto, o que causa filas nas estações, demoras e viagens mais longas.</p>
+      </article>
+      <article class="card">
+        <h4>Infraestrutura menor que a planejada</h4>
+        <p>A gerente do TransMilenio reconheceu, em março de 2026, que Bogotá não alcançou a meta de 388 km de troncais prevista para 2018. A cidade opera com menos de um terço do que foi projetado, segundo a reportagem.</p>
+      </article>
+      <article class="card">
+        <h4>Desigualdade no acesso</h4>
+        <p>As viagens são mais longas para quem vive longe do centro. Uma pesquisa de mobilidade de 2015 mostrou média de 56,1 minutos em Bogotá, mas acima de 70 minutos em Bosa e Soacha, áreas de renda mais baixa.</p>
+      </article>
+      <article class="card">
+        <h4>Evasão de pagamento</h4>
+        <p>Reportagens apontam os “colados”, pessoas que entram sem pagar, como problema nos sistemas de Bogotá, Cali, Barranquilla e Pereira.</p>
+      </article>
+      <article class="card">
+        <h4>Demanda abaixo do previsto</h4>
+        <p>Análises jornalísticas indicaram que vários sistemas de cidades médias, como Cali, Bucaramanga e Barranquilla, transportaram menos passageiros do que o projetado, o que afetou suas finanças.</p>
+      </article>
+    </div>
+
+    <div class="chart" style="margin-top:28px">
+      <h4>Tempo médio de viagem: Bogotá e áreas de renda mais baixa (minutos)</h4>
+      <div class="bar"><span>Média de Bogotá</span><div class="track"><div class="fill" style="width:78%">56,1</div></div></div>
+      <div class="bar"><span>Bosa e Soacha</span><div class="track"><div class="fill r" style="width:98%">mais de 70</div></div></div>
+      <p class="note">Fonte: Pesquisa de Mobilidade de 2015 (Secretaria Distrital de Mobilidade), citada em artigo acadêmico. É um dado antigo e serve como retrato da desigualdade naquele ano.</p>
+    </div>
+    <p class="note">As informações desta seção descrevem dificuldades registradas pelas fontes. A página não apresenta propostas de solução.</p>
+  </div>
+</section>
+
+<!-- 9. IMPACTOS NA POPULAÇÃO -->
+<section class="sec r" id="impactos" aria-labelledby="h-imp">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-imp"><span class="stop" aria-hidden="true">9</span>Impactos na população</h2>
+      <p>O sistema de transporte define a rotina: a que horas a pessoa sai de casa, quanto tempo passa no caminho e que oportunidades consegue alcançar.</p>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3 style="margin-top:0">Trabalho</h3>
+        <p>O tempo de viagem pesa diretamente no dia de trabalho. Pelos números de Bogotá, quem faz uma viagem de 79 minutos de ida e outra de volta gasta mais de duas horas e meia por dia no transporte público.</p>
+        <p>Em Ciudad Bolívar, a Prefeitura informou que o TransMiCable reduziu o percurso até o Portal El Tunal, uma das principais portas de entrada do TransMilenio, de até 50 minutos para 13. A localidade tem mais de 1 milhão de moradores, e a Prefeitura estima que mais de 800 mil são beneficiados diretamente.</p>
+        <h3>Educação</h3>
+        <p>As estações do metrô de Medellín mostram essa ligação em seus próprios nomes: há estações chamadas Universidad e Hospital, perto de grandes centros de ensino e de saúde da cidade. Deslocar-se com facilidade até a escola ou a universidade influencia a frequência e as escolhas de estudo.</p>
+        <h3>Serviços e vida social</h3>
+        <p>Ao lado da estação Manitas do TransMiCable, a Prefeitura anunciou a construção de um SuperCADE, centro com atendimento de órgãos públicos. Nos bairros próximos às estações da Ciudad Bolívar, também surgiram uma rota de turismo cultural, com murais, e eventos como os Carnavales TransMiCable.</p>
+      </div>
+      <figure>
+        <div class="chart" style="margin:0">
+          <h4>Tempo de viagem até o Portal El Tunal (minutos)</h4>
+          <div class="bar"><span>Antes do TransMiCable (até)</span><div class="track"><div class="fill r" style="width:100%">50</div></div></div>
+          <div class="bar"><span>Com o TransMiCable</span><div class="track"><div class="fill y" style="width:26%">13</div></div></div>
+          <p class="note">Fonte: Prefeitura de Bogotá (2019), sobre o percurso a partir de Mirador del Paraíso e arredores.</p>
+        </div>
+        <figcaption>Para os moradores de áreas de encosta, a diferença de tempo muda a rotina diária.</figcaption>
+      </figure>
+    </div>
+
+    <aside class="fact r"><p><strong>Rotina e saúde:</strong> viajar de bicicleta ou a pé até a estação também faz parte do movimento diário. A Ciclovía de Bogotá, com milhares de pessoas pedalando e caminhando aos domingos, é um exemplo de como a rua pode ser espaço de convivência e lazer.</p></aside>
+  </div>
+</section>
+
+<!-- 10. CURIOSIDADES -->
+<section class="sec alt" id="curiosidades" aria-labelledby="h-cur">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-cur"><span class="stop" aria-hidden="true">10</span>Curiosidades</h2>
+      <p>Fatos interessantes sobre o transporte colombiano e as diferenças entre as cidades.</p>
+    </div>
+
+    <div class="tiles">
+      <article class="tile"><h4>Único metrô em operação</h4><p>O metrô de Medellín é o único sistema de metrô ferroviário em funcionamento no país, até a abertura da Linha 1 de Bogotá.</p></article>
+      <article class="tile"><h4>Cultura Metro</h4><p>O programa de cultura cívica do metrô de Medellín começou em 1988, antes de as primeiras estações ficarem prontas.</p></article>
+      <article class="tile"><h4>O primeiro dia do TransMilenio</h4><p>Segundo uma reportagem de 2025, a primeira frota teve 14 ônibus articulados, e o primeiro trecho ligou o Portal da Calle 80 à estação Tercer Milenio, na Avenida Caracas.</p></article>
+      <article class="tile"><h4>Trens enormes</h4><p>Os trens da Linha 1 do metrô de Bogotá terão 134 metros e seis vagões, e cada um transportará até 1.800 passageiros, segundo a Prefeitura.</p></article>
+      <article class="tile"><h4>TransMiCable em números</h4><p>Segundo a Prefeitura de Bogotá, o sistema tem 163 cabines, 24 pilonas e 4 estações em cerca de 3,25 km.</p></article>
+      <article class="tile"><h4>Ciclovía com meio século</h4><p>A Ciclovía de Bogotá nasceu em 1974 e, em 2024, completou 50 anos de existência.</p></article>
+      <article class="tile"><h4>Teleférico turístico</h4><p>A Linha L do Metrocable leva até o Parque Arví, uma reserva natural que atrai visitantes e também faz parte do sistema de transporte.</p></article>
+      <article class="tile"><h4>Um cartão, vários meios</h4><p>Em Medellín, o cartão Cívica serve para metrô, bonde, Metrocable, Metroplús, EnCicla e alguns ônibus.</p></article>
+      <article class="tile"><h4>Escadas rolantes ao ar livre</h4><p>Na Comuna 13, em Medellín, escadas rolantes públicas ajudam a subir uma encosta residencial e se tornaram atração turística.</p></article>
+    </div>
+
+    <h3>Como se comparam as cidades</h3>
+    <div class="scroll" role="region" aria-label="Comparação entre cidades" tabindex="0">
+      <table>
+        <thead><tr><th>Cidade</th><th>Meios principais</th><th>Característica marcante</th></tr></thead>
+        <tbody>
+          <tr><td>Bogotá</td><td>TransMilenio, ônibus zonais (SITP), TransMiCable, Linha 1 do metrô em obras</td><td>Maior sistema de BRT do país, ciclovia dominical e cartão TuLlave</td></tr>
+          <tr><td>Medellín</td><td>Metrô (Linhas A e B), Metroplús, bonde, Metrocable, EnCicla</td><td>Sistema integrado do Vale de Aburrá com cartão Cívica e teleféricos urbanos</td></tr>
+          <tr><td>Cali</td><td>MIO (BRT) e MIO Cable</td><td>Combina corredores de ônibus e teleférico</td></tr>
+          <tr><td>Barranquilla</td><td>Transmetro (BRT)</td><td>Principal sistema de massa da cidade, começou em 2010</td></tr>
+          <tr><td>Cartagena</td><td>Transcaribe (BRT)</td><td>Foi o último dos sistemas integrados de massa a entrar em operação</td></tr>
+          <tr><td>Bucaramanga</td><td>Metrolínea (BRT)</td><td>Começou em 2009</td></tr>
+          <tr><td>Pereira</td><td>Megabús (BRT)</td><td>Começou em 2006, antes de Cali e Barranquilla</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">As diferenças refletem o tamanho, o relevo e as decisões de cada cidade. Medellín, por exemplo, tem metrô e teleféricos integrados, enquanto outras cidades dependem principalmente de ônibus em corredores.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="name">Transporte inteligente na Colômbia</p>
+    <p>Conteúdo informativo e educativo. Os dados citados têm fonte e ano indicados no texto e podem mudar com o tempo, porque obras, linhas e frotas são atualizadas. As imagens são ilustrações vetoriais criadas para este site.</p>
+    <p><strong>Fontes consultadas:</strong></p>
+    <ul>
+      <li>Prefeitura de Bogotá (bogota.gov.co) e Empresa Metro de Bogotá (metrodebogota.gov.co): Linha 1 do metrô, TransMiCable, Ciclovía, ciclorrutas, ônibus elétricos.</li>
+      <li>TransMilenio S.A. e Wikipédia (TransMilenio, SITVA e Metrocable de Medellín): descrição dos sistemas.</li>
+      <li>Metro de Medellín e sites de referência sobre redes de metrô (UrbanRail.net e Mapa Metro): linhas e estações.</li>
+      <li>Imprensa colombiana: Cambio, Publimetro, Noticias RCN, Portafolio, El Tiempo, El Espectador, La República e Valora Analitik.</li>
+      <li>Apresentação de estudo de caso sobre sistemas de transporte de massa na Colômbia (2018) e artigo acadêmico sobre mobilidade em Bogotá.</li>
+    </ul>
+    <p><a href="#topo">Voltar ao topo</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  try{
+    var links=[].slice.call(document.querySelectorAll('.topbar nav a'));
+    var byId={};
+    links.forEach(function(a){byId[a.getAttribute('href').slice(1)]=a;});
+    var secs=[].slice.call(document.querySelectorAll('main section[id]')).filter(function(s){return byId[s.id];});
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting)return;
+        links.forEach(function(a){a.classList.remove('on');a.removeAttribute('aria-current');});
+        var a=byId[e.target.id];
+        if(a){
+          a.classList.add('on');a.setAttribute('aria-current','true');
+          var ul=a.closest('ul');
+          if(ul&&ul.scrollTo){ul.scrollTo({left:a.offsetLeft-ul.clientWidth/2+a.clientWidth/2,behavior:'smooth'});}
+        }
+      });
+    },{rootMargin:'-30% 0px -65% 0px'});
+    secs.forEach(function(s){io.observe(s);});
+  }catch(err){}
+})();
+</script>
+</body>
+</html>
